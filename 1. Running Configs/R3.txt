@@ -1,0 +1,166 @@
+!
+hostname R3
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+memory-size iomem 10
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+cts logging verbose
+!
+!
+voice-card 0
+!
+!
+!
+!
+!
+!
+!
+!
+license udi pid CISCO2901/K9 sn FJC1928A14L
+license boot module c2900 technology-package securityk9
+license boot module c2900 technology-package uck9
+license boot module c2900 technology-package datak9
+license boot module c2900 technology-package CollabProSuitek9
+!
+!
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 172.17.13.10 255.255.255.252
+no shut
+ duplex auto
+ speed auto
+!
+interface Serial0/0/0
+ ip address 172.17.13.6 255.255.255.252
+ clock rate 2000000
+no shut
+!
+interface Serial0/0/1
+ no ip address
+ shutdown
+!
+interface Serial0/1/0
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+interface Serial0/1/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+!
+!
+router eigrp 13
+ network 172.17.13.4 0.0.0.3
+ network 172.17.13.8 0.0.0.3
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+control-plane
+!
+ !
+ !
+ !
+ !
+!
+mgcp behavior rsip-range tgcp-only
+mgcp behavior comedia-role none
+mgcp behavior comedia-check-media-src disable
+mgcp behavior comedia-sdp-force disable
+!
+mgcp profile default
+!
+!
+!
+!
+!
+!
+!
+gatekeeper
+ shutdown
+!
+!
+!
+line con 0
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output lat pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ login
+ transport input none
+!
+scheduler allocate 20000 1000
+!
+end

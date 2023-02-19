@@ -1,0 +1,198 @@
+!
+hostname ALS1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+switch 1 provision ws-c2960x-24ts-l
+!
+!
+vtp domain UOIT
+vtp mode transparent
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+vlan 5,10,20,30,40,50,99
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+ switchport mode trunk
+!
+interface Port-channel4
+ switchport mode trunk
+!
+interface FastEthernet0
+ no ip address
+ no ip route-cache
+ shutdown
+!
+interface GigabitEthernet1/0/1
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface GigabitEthernet1/0/2
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface GigabitEthernet1/0/3
+ switchport mode trunk
+ channel-group 4 mode active
+!
+interface GigabitEthernet1/0/4
+ switchport mode trunk
+ channel-group 4 mode active
+!
+interface GigabitEthernet1/0/5
+!
+interface GigabitEthernet1/0/6
+!
+interface GigabitEthernet1/0/7
+ shutdown
+!
+interface GigabitEthernet1/0/8
+ shutdown
+!
+interface GigabitEthernet1/0/9
+!
+interface GigabitEthernet1/0/10
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/11
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/12
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/13
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/14
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/15
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/16
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/17
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security
+ switchport port-security mac-address 5ce0.c527.f4a2
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/18
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security
+ switchport port-security mac-address 847b.eb20.90a4
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/19
+ switchport access vlan 40
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/20
+ switchport access vlan 40
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/21
+ switchport access vlan 40
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/22
+ switchport access vlan 40
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/23
+ switchport access vlan 40
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/24
+ switchport access vlan 40
+ switchport mode access
+ switchport voice vlan 50
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet1/0/25
+!
+interface GigabitEthernet1/0/26
+!
+interface GigabitEthernet1/0/27
+!
+interface GigabitEthernet1/0/28
+!
+interface Vlan1
+ no ip address
+ no ip route-cache
+ shutdown
+!
+interface Vlan40
+ ip address 10.13.40.10 255.255.255.0
+ no ip route-cache
+!
+ip default-gateway 10.13.99.5
+ip http server
+ip http secure-server
+!
+ip sla responder
+ip sla responder udp-echo ipaddress 10.13.99.5 port 5000
+!
+!
+monitor session 1 source interface Gi1/0/6
+monitor session 1 destination remote vlan 100
+end
